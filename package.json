@@ -1,0 +1,15 @@
+{
+  "name": "orderflow",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix dashboard\"",
+    "seed": "npm run seed --prefix server",
+    "test": "npm run test --prefix server",
+    "build": "npm run build --prefix server && npm run build --prefix dashboard",
+    "install:all": "npm install --prefix server --legacy-peer-deps && npm install --prefix dashboard --legacy-peer-deps"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
