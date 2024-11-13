@@ -78,7 +78,7 @@ export async function login(email: string, password: string, tenantSlug?: string
   const user = await User.findOne(query);
   if (!user || !user.isActive) throw new UnauthorizedError('Invalid credentials');
 
-  const valid = bcrypt.compare(password, user.passwordHash);
+  const valid = await bcrypt.compare(password, user.passwordHash);
   if (!valid) throw new UnauthorizedError('Invalid credentials');
 
   const payload: AuthPayload = {
