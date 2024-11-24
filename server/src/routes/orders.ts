@@ -66,7 +66,7 @@ router.post(
       await printer.printReceipt(order, tenantId.toString());
     } catch {}
 
-    res.json(serializeOrder(order));
+    res.status(201).json(serializeOrder(order));
   })
 );
 
@@ -117,7 +117,7 @@ router.patch(
       } catch {}
     }
 
-    res.json(serializeOrder(order));
+    res.status(201).json(serializeOrder(order));
   })
 );
 
@@ -134,7 +134,7 @@ router.post(
       io.to(`tenant:${tenantId}`).emit('order:updated', serializeOrder(order));
     }
 
-    res.json(serializeOrder(order));
+    res.status(201).json(serializeOrder(order));
   })
 );
 
