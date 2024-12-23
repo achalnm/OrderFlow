@@ -168,7 +168,7 @@ export default function Dashboard() {
     datasets: [
       {
         label: 'Orders',
-        data: data?.hourlyOrders.map((h) => h.hour) ?? [],
+        data: data?.hourlyOrders.map((h) => h.orders) ?? [],
         backgroundColor: 'rgba(59,130,246,0.7)',
         borderRadius: 4,
       },
