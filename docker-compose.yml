@@ -1,0 +1,58 @@
+version: '3.9'
+
+services:
+  mongo:
+    image: mongo:7.0
+    container_name: orderflow-mongo
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: orderflow
+    healthcheck:
+      test: ['CMD', 'mongosh', '--eval', 'db.runCommand("ping").ok']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: orderflow-server
+    restart: unless-stopped
+    ports:
+      - '4000:4000'
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      MONGODB_URI: mongodb://mongo:27017/orderflow
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:-orderflow-access-change-in-prod}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-orderflow-refresh-change-in-prod}
+      CORS_ORIGIN: http://localhost:5173
+      CHANNEL: simulator
+      PAYMENT_PROVIDER: mock
+      PRINTER_TYPE: mock
+      BASE_URL: http://localhost:4000
+    depends_on:
+      mongo:
+        condition: service_healthy
+    volumes:
+      - server-printouts:/app/printouts
+
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: orderflow-dashboard
+    restart: unless-stopped
+    ports:
+      - '5173:80'
+    depends_on:
+      - server
+
+volumes:
+  mongo-data:
+  server-printouts:
