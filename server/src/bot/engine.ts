@@ -21,7 +21,7 @@ export interface IncomingMessage {
   text: string;
 }
 
-const SESSION_TTL_MS = 30 * 60 * 1000; // 30 min
+const SESSION_TTL_MS = 20 * 60 * 1000;
 
 function levenshtein(a: string, b: string): number {
   const m = a.length, n = b.length;
