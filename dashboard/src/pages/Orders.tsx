@@ -47,7 +47,7 @@ const STATUS_LIST: OrderStatus[] = [
 const STATUS_TRANSITIONS: Record<OrderStatus, OrderStatus[]> = {
   pending: ['confirmed', 'cancelled'],
   confirmed: ['preparing', 'cancelled'],
-  preparing: ['ready'],
+  preparing: ['ready', 'cancelled'],
   ready: ['completed'],
   completed: [],
   cancelled: [],
