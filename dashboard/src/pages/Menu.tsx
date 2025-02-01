@@ -96,7 +96,7 @@ function ItemModal({ item, categories, defaultCategoryId, onClose, onSaved, show
           </div>
           <div>
             <label className="label">Price (₹)</label>
-            <input className="input" type="number" min="0" step="0.01" value={priceRupees} onChange={(e) => setPriceRupees(e.target.value)} placeholder="250.00" required />
+            <input className="input" type="number" min="1" step="0.5" value={priceRupees} onChange={(e) => setPriceRupees(e.target.value)} placeholder="250.00" required />
           </div>
           <div>
             <label className="label">Tags (comma-separated)</label>
