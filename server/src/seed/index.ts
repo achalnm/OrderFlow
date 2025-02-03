@@ -19,7 +19,7 @@ export async function seed(disconnectAfter = true) {
   await connectDB(config.MONGODB_URI);
   logger.info('Connected to MongoDB for seeding');
 
-  await Tenant.deleteMany({ slug: 'spice-garden' });
+  await Tenant.deleteMany({ slug: { $in: ['spice-garden', 'demo'] } });
 
   // create demo tenant
   const tenant = await Tenant.create({
