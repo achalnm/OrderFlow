@@ -46,7 +46,7 @@ const STATUS_BADGE: Record<string, string> = {
 };
 
 function paiseToRupees(p: number) {
-  return '₹' + (p / 100).toFixed(2);
+  return '₹' + (p / 100).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 function formatDate(d: string | null) {
