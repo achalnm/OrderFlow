@@ -26,7 +26,7 @@ export function createApp() {
     })
   );
   app.use(cors({ origin: config.CORS_ORIGIN, credentials: true }));
-  app.use(express.json({ limit: '5mb' }));
+  app.use(express.json({ limit: '2mb' }));
   app.use(requestId);
 
   if (config.NODE_ENV !== 'test') {
