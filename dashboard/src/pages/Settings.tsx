@@ -98,8 +98,8 @@ function ProfileTab({ showToast }: { showToast: (msg: string, type?: 'error' | '
           className="input"
           type="number"
           min={0}
-          max={100}
-          step={0.01}
+          max={28}
+          step={0.5}
           value={settings.taxRate}
           onChange={(e) => setSettings({ ...settings, taxRate: parseFloat(e.target.value) || 0 })}
           placeholder="5"
