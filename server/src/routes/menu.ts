@@ -31,7 +31,7 @@ function serializeItem(i: {
 }
 
 const categorySchema = z.object({
-  name: z.string().min(1).max(100),
+  name: z.string().min(1).max(80),
   sortOrder: z.number().optional(),
 });
 
