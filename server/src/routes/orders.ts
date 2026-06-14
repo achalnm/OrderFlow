@@ -117,7 +117,7 @@ router.patch(
       } catch {}
     }
 
-    res.status(201).json(serializeOrder(order));
+    res.json(serializeOrder(order));
   })
 );
 
@@ -134,7 +134,7 @@ router.post(
       io.to(`tenant:${tenantId}`).emit('order:updated', serializeOrder(order));
     }
 
-    res.status(201).json(serializeOrder(order));
+    res.json(serializeOrder(order));
   })
 );
 
