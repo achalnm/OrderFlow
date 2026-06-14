@@ -4,7 +4,7 @@ WhatsApp order management for restaurants. Customers place orders through a bot 
 
 ---
 
-During my internship at **Blue Ticks Innovations Pvt. Ltd** (incubated at IIT Mandi Catalyst, Himachal Pradesh) I worked on **SupFoodie AI**, a WhatsApp ordering chatbot for restaurants. OrderFlow is a personal version I built on the side with the company's permission. The high-level concept is roughly inspired by that work but this is a separate codebase written from scratch with a different approach to the architecture, the bot engine, and the dashboard.
+During my internship at **Blue Ticks Innovations Pvt. Ltd** (incubated at IIT Mandi Catalyst, Himachal Pradesh) I worked on **SupFoodie AI**, a WhatsApp ordering chatbot for restaurants. OrderFlow is a personal version I built on the side with the company's permission. The high-level concept is roughly inspired by that work but this is a seperate codebase written from scratch with a different approach to the architecture, the bot engine, and the dashboard.
 
 **Live:** https://order-flow-omega.vercel.app  
 Login: `owner@demo.test` / `Demo@1234`  
