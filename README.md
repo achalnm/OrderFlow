@@ -70,6 +70,72 @@ Login: `owner@demo.test` / `Demo@1234`
 
 ---
 
+## Screenshots
+
+### Dashboard and orders
+
+![Login page](Screenshots/login.png)
+
+Staff sign in here to access the dashboard. The page is light and dark mode aware and tokens refresh silently in the background.
+
+![Dashboard overview](Screenshots/dashboard.png)
+
+Daily revenue and order counts at a glance. The revenue chart updates as new orders come in throughout the day.
+
+![Orders table](Screenshots/orders.png)
+
+All orders in one place with live status badges, customer names, and timestamps. Filter by status or narrow down by date range from the top bar.
+
+![Order detail](Screenshots/order-detail.png)
+
+Clicking any row opens this side drawer. Staff can move the order through each stage of the pipeline or cancel it with a reason logged.
+
+![Menu management](Screenshots/menu.png)
+
+Add and edit menu items, flip them on or off without deleting, and keep them organised by category.
+
+![Settings](Screenshots/settings.png)
+
+Per-restaurant settings for the profile name, WhatsApp number, and tax rate.
+
+### Bot simulator
+
+![Simulator](Screenshots/simulator.png)
+
+The simulator lives inside the dashboard so any tenant can be tested without needing a real WhatsApp number. Type a slug, enter a phone, and start chatting.
+
+![Menu browsing](Screenshots/bot-menu-browse.png)
+
+A customer browsing the menu through the bot. The engine walks through categories step by step and builds the cart as items are selected.
+
+![Order confirmed](Screenshots/bot-order-confirmed.png)
+
+A cash on delivery order being confirmed. The bot sends the order number to the customer and the same order shows up on the orders page in real time without a refresh.
+
+![Live orders](Screenshots/orders-live-data.png)
+
+The orders page right after a few simulator runs. The new orders landed here live via Socket.io as soon as the bot confirmed them.
+
+### Infrastructure
+
+![MongoDB Atlas data](Screenshots/mongodb-atlas-data.png)
+
+Order documents sitting in the Atlas collection. The Render server writes here on every confirmed order and reads from it on every API request.
+
+![MongoDB cluster](Screenshots/mongodb-cluster-metrics.png)
+
+Atlas cluster metrics showing around 9 active connections and 17 MB of data. Running on AWS N. Virginia on the M0 free tier.
+
+![Render deployment](Screenshots/render-deployment.png)
+
+The server deployed to Render as a Docker container. Auto-deploys fire on every push to master and the deploy history stays visible here.
+
+![Uptime monitoring](Screenshots/uptime-monitoring.png)
+
+UptimeRobot pinging the health endpoint every 5 minutes so the Render instance stays warm and does not spin down between requests.
+
+---
+
 ## Tests
 
 ```bash
