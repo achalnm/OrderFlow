@@ -15,14 +15,12 @@ async function main() {
   const config = getConfig();
   await connectDB(config.MONGODB_URI);
 
-  if (process.env.NODE_ENV !== 'production') {
-    const count = await Tenant.countDocuments();
-    if (count === 0) {
-      logger.info('no tenants, seeding...');
-      const { seed } = await import('./seed/index');
-      await seed(false);
-      logger.info('seed done');
-    }
+  const count = await Tenant.countDocuments();
+  if (count === 0) {
+    logger.info('no tenants, seeding...');
+    const { seed } = await import('./seed/index');
+    await seed(false);
+    logger.info('seed done');
   }
 
   const app = createApp();

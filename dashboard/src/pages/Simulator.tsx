@@ -90,7 +90,8 @@ export default function Simulator() {
   useEffect(() => {
     if (!tenantSlug.trim()) return;
     const token = localStorage.getItem('accessToken');
-    const s = io('/simulator', {
+    const SERVER = import.meta.env.VITE_API_URL;
+    const s = io(SERVER ? `${SERVER}/simulator` : '/simulator', {
       auth: { token },
       query: { tenantSlug: tenantSlug.trim() },
       transports: ['websocket', 'polling'],

@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const SERVER = import.meta.env.VITE_API_URL ?? '';
+
 export const api = axios.create({
-  baseURL: '/api',
+  baseURL: `${SERVER}/api`,
   headers: { 'Content-Type': 'application/json' },
 });
 
@@ -46,7 +48,7 @@ async function refreshAccessToken(): Promise<string | null> {
   const refreshToken = localStorage.getItem('refreshToken');
   if (!refreshToken) return null;
   try {
-    const res = await axios.post('/api/auth/refresh', { refreshToken });
+    const res = await axios.post(`${SERVER}/api/auth/refresh`, { refreshToken });
     const { accessToken, refreshToken: newRefresh } = res.data;
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', newRefresh);

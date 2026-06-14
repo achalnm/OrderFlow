@@ -16,7 +16,8 @@ export function SocketProvider({ children, tenantId }: { children: ReactNode; te
     const token = localStorage.getItem('accessToken');
     if (!token || !tenantId) return;
 
-    const s = io('/', {
+    const SERVER = import.meta.env.VITE_API_URL;
+    const s = io(SERVER || '/', {
       auth: { token },
       transports: ['websocket', 'polling'],
     });
