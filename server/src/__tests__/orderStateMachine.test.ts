@@ -33,7 +33,7 @@ beforeEach(async () => {
   await request(app)
     .post('/api/menu/items')
     .set('Authorization', `Bearer ${accessToken}`)
-    .send({ categoryId: cat.body._id, name: 'Burger', price: 20000 });
+    .send({ categoryId: cat.body.id, name: 'Burger', price: 20000 });
 });
 
 afterAll(async () => {
@@ -49,7 +49,7 @@ async function createOrder() {
     .set('Authorization', `Bearer ${accessToken}`)
     .send({
       customerPhone: '+919999999999',
-      items: [{ menuItemId: items.body[0]._id, qty: 1 }],
+      items: [{ menuItemId: items.body[0].id, qty: 1 }],
       paymentMethod: 'cod',
     });
   return res.body;
@@ -62,7 +62,7 @@ describe('Order state machine', () => {
 
     for (const status of ['confirmed', 'preparing', 'ready', 'completed'] as const) {
       const res = await request(app)
-        .patch(`/api/orders/${order._id}/status`)
+        .patch(`/api/orders/${order.id}/status`)
         .set('Authorization', `Bearer ${accessToken}`)
         .send({ status });
       expect(res.status).toBe(200);
@@ -73,7 +73,7 @@ describe('Order state machine', () => {
   it('rejects illegal transition: pending → preparing', async () => {
     const order = await createOrder();
     const res = await request(app)
-      .patch(`/api/orders/${order._id}/status`)
+      .patch(`/api/orders/${order.id}/status`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send({ status: 'preparing' });
     expect(res.status).toBe(409);
@@ -83,12 +83,12 @@ describe('Order state machine', () => {
     const order = await createOrder();
     for (const s of ['confirmed', 'preparing', 'ready', 'completed'] as const) {
       await request(app)
-        .patch(`/api/orders/${order._id}/status`)
+        .patch(`/api/orders/${order.id}/status`)
         .set('Authorization', `Bearer ${accessToken}`)
         .send({ status: s });
     }
     const res = await request(app)
-      .patch(`/api/orders/${order._id}/status`)
+      .patch(`/api/orders/${order.id}/status`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send({ status: 'cancelled' });
     expect(res.status).toBe(409);
@@ -97,7 +97,7 @@ describe('Order state machine', () => {
   it('allows cancel from pending', async () => {
     const order = await createOrder();
     const res = await request(app)
-      .patch(`/api/orders/${order._id}/status`)
+      .patch(`/api/orders/${order.id}/status`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send({ status: 'cancelled', reason: 'Test cancel' });
     expect(res.status).toBe(200);
@@ -107,11 +107,11 @@ describe('Order state machine', () => {
   it('allows cancel from confirmed', async () => {
     const order = await createOrder();
     await request(app)
-      .patch(`/api/orders/${order._id}/status`)
+      .patch(`/api/orders/${order.id}/status`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send({ status: 'confirmed' });
     const res = await request(app)
-      .patch(`/api/orders/${order._id}/status`)
+      .patch(`/api/orders/${order.id}/status`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send({ status: 'cancelled', reason: 'Changed mind' });
     expect(res.status).toBe(200);

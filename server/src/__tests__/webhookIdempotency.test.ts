@@ -40,18 +40,18 @@ describe('Payment webhook idempotency', () => {
     const item = await request(app)
       .post('/api/menu/items')
       .set('Authorization', `Bearer ${token}`)
-      .send({ categoryId: cat.body._id, name: 'Pizza', price: 20000 });
+      .send({ categoryId: cat.body.id, name: 'Pizza', price: 20000 });
 
     const order = await request(app)
       .post('/api/orders')
       .set('Authorization', `Bearer ${token}`)
       .send({
         customerPhone: '+919000000099',
-        items: [{ menuItemId: item.body._id, qty: 1 }],
+        items: [{ menuItemId: item.body.id, qty: 1 }],
         paymentMethod: 'online',
       });
 
-    const orderId = order.body._id;
+    const orderId = order.body.id;
     const eventId = 'test_event_123';
 
     // First webhook call

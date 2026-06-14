@@ -138,7 +138,7 @@ UptimeRobot pinging the health endpoint every 5 minutes so the Render instance s
 cd server && npm test
 ```
 
-23 tests covering: auth flows, RBAC (owner vs manager vs staff), tenant data isolation, order state machine, bot FSM transitions, and webhook idempotency.
+27 tests covering: auth flows, RBAC (owner vs manager vs staff), tenant data isolation, order state machine, bot FSM transitions, and webhook idempotency.
 
 ---
 
