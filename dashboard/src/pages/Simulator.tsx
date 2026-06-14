@@ -128,14 +128,17 @@ export default function Simulator() {
         `/simulator/${tenantSlug.trim()}/message`,
         { phone: phone.trim(), text: text.trim() }
       );
-      const botMsgs = parseReplies(res.data.replies);
-      setMessages((prev) => [...prev, ...botMsgs]);
+      // socket handles bot replies when connected; fall back to HTTP response if not
+      if (!connected) {
+        const botMsgs = parseReplies(res.data.replies);
+        setMessages((prev) => [...prev, ...botMsgs]);
+      }
     } catch {
       showToast('Failed to send message.');
     } finally {
       setSending(false);
     }
-  }, [tenantSlug, phone]);
+  }, [tenantSlug, phone, connected]);
 
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'Enter' && !e.shiftKey) {
