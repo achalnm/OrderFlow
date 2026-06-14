@@ -1,6 +1,8 @@
 {
   "name": "orderflow",
   "version": "1.0.0",
+  "description": "WhatsApp order management for restaurants",
+  "author": "Achal Nanjundamurthy",
   "private": true,
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix dashboard\"",

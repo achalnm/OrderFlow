@@ -1,6 +1,8 @@
 {
   "name": "@orderflow/server",
   "version": "1.0.0",
+  "description": "API server and WhatsApp bot engine",
+  "author": "Achal Nanjundamurthy",
   "private": true,
   "scripts": {
     "dev": "tsx watch src/index.ts",

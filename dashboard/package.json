@@ -1,6 +1,8 @@
 {
   "name": "@orderflow/dashboard",
   "version": "1.0.0",
+  "description": "Restaurant management dashboard",
+  "author": "Achal Nanjundamurthy",
   "private": true,
   "type": "module",
   "scripts": {

@@ -21,7 +21,7 @@ export class WhatsAppWebJsChannel implements MessagingChannel {
         // Print QR to terminal
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         try { const qrcode = require('qrcode-terminal') as { generate: (qr: string, opts: { small: boolean }) => void }; qrcode.generate(qr, { small: true }); }
-        catch { console.log('QR:', qr); }
+        catch { logger.info({ qr }, 'QR fallback'); }
       });
 
       client.on('ready', () => {
